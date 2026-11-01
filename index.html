@@ -1,0 +1,1332 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>ราวแขวน Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Prompt:wght@300;400;500;600&display=swap">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --ink: #121212;
+  --muted: #727272;
+  --line: #E6E6E6;
+  --soft: #F3F3F1;
+  --sale: #B3261E;
+  --rail-top: #E4E7E9;
+  --rail-bottom: #7E858A;
+  --shadow: rgba(0, 0, 0, 0.16);
+  --body: "Prompt", "Noto Sans Thai", system-ui, sans-serif;
+  --accent-face: "Cormorant Garamond", Georgia, serif;
+  --dye-ms: 1.1s;
+  --dye-ease: cubic-bezier(.45, .05, .25, 1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.65;
+}
+button { font-family: inherit; }
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.announce {
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.78rem;
+  letter-spacing: .04em;
+  text-align: center;
+}
+.announce .wrap { padding-block: 9px; }
+
+.header { border-bottom: 1px solid var(--line); }
+.header .wrap {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  padding-block: 22px;
+}
+.logo {
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: .02em;
+  line-height: 1;
+}
+.logo span { display: block; margin-top: 5px; font-size: .62rem; font-weight: 400; letter-spacing: .32em; color: var(--muted); }
+.nav { display: flex; gap: 30px; }
+.nav a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.nav a.is-sale { color: var(--sale); }
+.icons { display: flex; justify-content: flex-end; gap: 18px; }
+.icon-btn {
+  position: relative;
+  display: inline-flex;
+  padding: 4px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+.icon-btn svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: .66rem;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+  transition: transform .3s;
+}
+.badge.bump { transform: scale(1.35); }
+
+.hero { background: var(--soft); }
+.hero .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 40px;
+  padding-block: 56px;
+}
+.eyebrow {
+  margin: 0 0 14px;
+  font-size: .74rem;
+  font-weight: 500;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero h1 {
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.hero h1 em {
+  display: block;
+  font-family: var(--accent-face);
+  font-weight: 500;
+  font-size: 1.15em;
+  letter-spacing: .01em;
+}
+.hero p.lede { margin: 18px 0 30px; max-width: 44ch; color: var(--muted); }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 30px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .25s, color .25s;
+}
+.btn:hover { background: transparent; color: var(--ink); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: var(--bg); }
+
+.window {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 18px;
+  --W: 150px;
+  min-height: calc(var(--W) * 1.62);
+}
+.window::before {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: calc(var(--W) * .085 - 4px);
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(var(--rail-top), var(--rail-bottom));
+  box-shadow: 0 4px 8px var(--shadow);
+}
+.window-item {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.window-item:nth-child(2) { margin-top: 0; }
+.window-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; }
+
+.services { border-bottom: 1px solid var(--line); }
+.services .wrap {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  padding-block: 30px;
+}
+.service { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.service svg { flex: none; width: 34px; height: 34px; fill: none; stroke: var(--ink); stroke-width: 1.2; }
+.service b { display: block; font-weight: 500; font-size: .9rem; }
+.service span { font-size: .8rem; color: var(--muted); }
+
+.shop { padding-block: 64px 24px; }
+.section-head { text-align: center; margin-bottom: 26px; }
+.section-head h2 { margin: 0; font-weight: 500; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: .01em; }
+.section-head p { margin: 6px auto 0; max-width: 52ch; color: var(--muted); }
+.tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 28px; margin-bottom: 18px; }
+.tab {
+  padding: 6px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.tab[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.tab:focus-visible, .icon-btn:focus-visible, .btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.rack-block { margin-top: 28px; }
+.rack-block[hidden] { display: none; }
+.rack-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.rack-label span { color: var(--muted); font-weight: 400; letter-spacing: .06em; text-transform: none; }
+.rack-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-top: 18px;
+  scrollbar-width: thin;
+}
+.rack-track {
+  --W: 210px;
+  --slot: calc(var(--W) * .3);
+  --push: calc((var(--W) - var(--slot)) / 2 + 6px);
+  position: relative;
+  display: flex;
+  width: max-content;
+  margin-inline: auto;
+  padding: 0 calc(var(--W) / 2);
+  list-style: none;
+  margin-block: 0;
+}
+.rack-track::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--W) / 4);
+  right: calc(var(--W) / 4);
+  top: calc(var(--W) * .085 - 4px);
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(var(--rail-top), var(--rail-bottom));
+  box-shadow: 0 4px 8px var(--shadow);
+}
+.slot {
+  position: relative;
+  flex: 0 0 var(--slot);
+  height: calc(var(--W) * 1.62 + 74px);
+  transition: transform .6s cubic-bezier(.3, .7, .3, 1);
+}
+.slot:is(:hover, :focus-within) { z-index: 5; }
+.slot:is(:hover, :focus-within)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - var(--W) / 2);
+  width: var(--W);
+  cursor: pointer;
+}
+.slot:is(:hover, :focus-within) ~ .slot { transform: translateX(var(--push)); }
+.slot:has(~ .slot:is(:hover, :focus-within)) { transform: translateX(calc(var(--push) * -1)); }
+.hang-btn {
+  position: absolute;
+  inset: 0 0 74px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.hang-btn:focus-visible { outline: none; }
+.slot:focus-within .slot-meta { text-decoration: underline; }
+.slot .hanging {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.slot-meta {
+  position: absolute;
+  top: calc(var(--W) * 1.62 + 8px);
+  left: 50%;
+  width: var(--W);
+  transform: translate(-50%, 6px);
+  opacity: 0;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity .35s, transform .35s;
+}
+.slot:is(:hover, :focus-within) .slot-meta { opacity: 1; transform: translate(-50%, 0); }
+.slot-meta b { display: block; font-weight: 500; font-size: .92rem; }
+.slot-meta span { font-size: .82rem; color: var(--muted); }
+
+.hanging { position: relative; display: block; width: var(--W); --dye: #888; }
+.swing {
+  position: relative;
+  display: block;
+  transform-origin: 50% calc(var(--W) * .085);
+  perspective: 1100px;
+}
+.swing.is-swinging { animation: swing 1.6s cubic-bezier(.3, .6, .4, 1); }
+.swing.is-dropping { animation: drop 1s cubic-bezier(.2, .8, .3, 1); }
+.swing.is-swaying { animation: sway 1.2s ease-in-out; }
+@keyframes swing {
+  0% { transform: rotate(0); }
+  20% { transform: rotate(3.5deg); }
+  45% { transform: rotate(-2.4deg); }
+  68% { transform: rotate(1.3deg); }
+  86% { transform: rotate(-.5deg); }
+  100% { transform: rotate(0); }
+}
+@keyframes drop {
+  0% { transform: translateY(-26px); opacity: 0; }
+  60% { transform: translateY(3px); opacity: 1; }
+  100% { transform: none; }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(0); }
+  35% { transform: rotate(-1.6deg); }
+  70% { transform: rotate(1deg); }
+}
+.hook { display: block; width: 20%; height: auto; margin: 0 auto; overflow: visible; }
+.hook path { fill: none; stroke-width: 3.4; stroke-linecap: round; }
+
+.turn {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 200 / 260;
+  transform-style: preserve-3d;
+  transform: rotateY(-90deg);
+  transition: transform .95s cubic-bezier(.45, .05, .2, 1);
+}
+.face {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: opacity .45s ease;
+}
+.face svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 14px 12px var(--shadow)); }
+.face-front, .face-back { left: 0; width: 100%; }
+.face-front { transform: translateZ(calc(var(--W) * .04)); opacity: 0; transition-delay: .12s; }
+.face-back { transform: rotateY(180deg) translateZ(calc(var(--W) * .04)); }
+.face-side-r, .face-side-l { left: 32.5%; width: 35%; }
+.face-side-r { transform: rotateY(90deg); }
+.face-side-l { transform: rotateY(-90deg); opacity: 0; }
+.face-side-l svg { transform: scaleX(-1); }
+
+.turn.is-front, .slot:is(:hover, :focus-within) .turn { transform: rotateY(0); }
+.turn.is-back { transform: rotateY(180deg); }
+.turn.is-front .face-front, .turn.is-back .face-front, .slot:is(:hover, :focus-within) .face-front { opacity: 1; }
+.turn.is-front .face-side-r, .turn.is-back .face-side-r, .slot:is(:hover, :focus-within) .face-side-r { opacity: 0; transition-delay: 0s; }
+.turn.is-flipping .face-side-l { animation: side-flash .95s ease; }
+@keyframes side-flash { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+.g .b, .g .s, .g .t, .g .d {
+  stroke: color-mix(in oklab, var(--dye) 72%, #000);
+  stroke-width: .8;
+  stroke-linejoin: round;
+  transition: fill var(--dye-ms) var(--dye-ease), stroke var(--dye-ms) var(--dye-ease);
+}
+.g .b { fill: var(--dye); }
+.g .s { fill: var(--dye); transition-delay: .1s; }
+.g .t { fill: color-mix(in oklab, var(--dye) 86%, #000); transition-delay: .2s; }
+.g .d { fill: color-mix(in oklab, var(--dye) 48%, #000); }
+.g .sh { pointer-events: none; }
+.g .fd { fill: none; stroke: #000; stroke-opacity: .34; stroke-width: 7; stroke-linecap: round; }
+.g .fl { fill: none; stroke: #fff; stroke-opacity: .22; stroke-width: 5; stroke-linecap: round; }
+.g .k {
+  fill: none;
+  stroke: color-mix(in oklab, var(--dye) 58%, #000);
+  stroke-width: .9;
+  stroke-dasharray: 2.6 2;
+  transition: stroke var(--dye-ms) var(--dye-ease) .15s;
+}
+.g .rib {
+  fill: none;
+  stroke: color-mix(in oklab, var(--dye) 70%, #000);
+  stroke-width: .9;
+  opacity: .6;
+  transition: stroke var(--dye-ms) var(--dye-ease) .2s;
+}
+.g .ln { fill: none; stroke: color-mix(in oklab, var(--dye) 55%, #000); stroke-width: 1.3; transition: stroke var(--dye-ms) var(--dye-ease); }
+.g .n {
+  fill: color-mix(in oklab, var(--dye) 40%, #fff);
+  stroke: color-mix(in oklab, var(--dye) 55%, #000);
+  stroke-width: .7;
+  transition: fill var(--dye-ms) var(--dye-ease) .3s;
+}
+.g .metal-btn { fill: #B8A27A; stroke: #7A6845; stroke-width: .7; }
+.g .str { fill: none; stroke: color-mix(in oklab, var(--dye) 30%, #fff); stroke-width: 2.4; stroke-linecap: round; transition: stroke var(--dye-ms) var(--dye-ease) .3s; }
+.g .wood { stroke: #7E5A39; stroke-width: .6; }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  background: rgba(18, 18, 18, .5);
+  animation: fade .25s ease;
+}
+@keyframes fade { from { opacity: 0; } }
+.sheet {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  width: min(100%, 1000px);
+  max-height: 100%;
+  overflow: auto;
+  background: var(--bg);
+  box-shadow: 0 30px 80px var(--shadow);
+  animation: rise .4s cubic-bezier(.2, .8, .3, 1);
+}
+@keyframes rise { from { transform: translateY(24px); opacity: 0; } }
+.close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.close:focus-visible, .view-tabs button:focus-visible, .qty button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding: 22px 20px 26px;
+  background: var(--soft);
+  --W: min(300px, 62vw);
+}
+.stage::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(22px + var(--W) * .085 - 4px);
+  height: 8px;
+  background: linear-gradient(var(--rail-top), var(--rail-bottom));
+  box-shadow: 0 4px 8px var(--shadow);
+}
+.view-tabs { position: relative; display: flex; gap: 24px; }
+.view-tabs button {
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.view-tabs button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+
+.info { display: flex; flex-direction: column; gap: 20px; padding: 40px 36px 36px; min-width: 0; }
+.info header { display: flex; flex-direction: column; gap: 4px; padding-right: 40px; }
+.info h2 { margin: 0; font-weight: 500; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.25; }
+.price { margin: 6px 0 0; font-size: 1.3rem; font-weight: 400; font-variant-numeric: tabular-nums; }
+.desc { margin: 0; color: var(--muted); max-width: 46ch; }
+.opt { margin: 0; padding: 0; border: 0; min-width: 0; }
+.opt legend {
+  padding: 0;
+  margin-bottom: 10px;
+  font-size: .76rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.opt legend span { font-weight: 300; letter-spacing: .02em; text-transform: none; color: var(--muted); }
+.swatches, .sizes { display: flex; flex-wrap: wrap; gap: 10px; }
+.sw, .sz { position: relative; cursor: pointer; }
+.sw input, .sz input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.sw .chipc {
+  display: block;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15), 0 0 0 3px var(--bg), 0 0 0 4px transparent;
+  transition: box-shadow .25s;
+}
+.sw input:checked + .chipc { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15), 0 0 0 3px var(--bg), 0 0 0 4px var(--ink); }
+.sw input:focus-visible + .chipc, .sz input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 6px; }
+.sz span {
+  display: block;
+  min-width: 48px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  font-size: .85rem;
+  font-weight: 500;
+  text-align: center;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.sz input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.buy { display: flex; flex-wrap: wrap; gap: 12px; }
+.qty { display: inline-flex; align-items: stretch; border: 1px solid var(--line); }
+.qty button { width: 40px; border: 0; background: none; color: var(--ink); font-size: 1.1rem; cursor: pointer; }
+.qty output { min-width: 34px; display: grid; place-items: center; font-weight: 500; font-variant-numeric: tabular-nums; }
+.buy .btn { flex: 1 1 180px; }
+.specs { display: grid; gap: 8px; margin: 0; padding-top: 18px; border-top: 1px solid var(--line); }
+.specs div { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px; }
+.specs dt { font-size: .76rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+.specs dd { margin: 0; font-size: .88rem; color: var(--muted); }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+  z-index: 30;
+  max-width: calc(100% - 32px);
+  padding: 13px 20px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: .88rem;
+  transform: translateX(-50%);
+  box-shadow: 0 10px 30px var(--shadow);
+  animation: toast .3s ease;
+}
+@keyframes toast { from { transform: translate(-50%, 12px); opacity: 0; } }
+
+.footer { margin-top: 56px; background: var(--soft); }
+.footer .wrap {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  padding-block: 48px 28px;
+}
+.footer h3 { margin: 0 0 12px; font-size: .76rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; }
+.footer p, .footer li { margin: 0; font-size: .86rem; color: var(--muted); }
+.footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.copyright { grid-column: 1 / -1; padding-top: 20px; border-top: 1px solid var(--line); font-size: .76rem; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .header .wrap { grid-template-columns: 1fr auto; }
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); padding-block: 36px; }
+  .window { --W: 118px; gap: 8px; }
+  .services .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sheet { grid-template-columns: minmax(0, 1fr); }
+  .stage { --W: min(240px, 58vw); }
+  .info { padding: 26px 20px 30px; }
+  .footer .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .rack-track { --W: 160px; }
+  .window { --W: 96px; gap: 4px; }
+  .services .wrap { grid-template-columns: minmax(0, 1fr); }
+  .footer .wrap { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .swing.is-swinging, .swing.is-dropping, .swing.is-swaying, .overlay, .sheet, .toast, .turn.is-flipping .face-side-l { animation: none; }
+  .turn, .slot { transition-duration: .01ms; }
+}
+</style>
+</head>
+<body>
+
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs id="defs">
+    <linearGradient id="g-round" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".32"/>
+      <stop offset=".2" stop-color="#000" stop-opacity="0"/>
+      <stop offset=".46" stop-color="#fff" stop-opacity=".12"/>
+      <stop offset=".8" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".36"/>
+    </linearGradient>
+    <linearGradient id="g-top" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".16"/>
+      <stop offset=".3" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".84" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".24"/>
+    </linearGradient>
+    <linearGradient id="g-wood" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#DDB98F"/>
+      <stop offset="1" stop-color="#9A6D43"/>
+    </linearGradient>
+    <linearGradient id="g-metal" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#7B8186"/>
+      <stop offset=".5" stop-color="#E6E9EB"/>
+      <stop offset="1" stop-color="#6A7075"/>
+    </linearGradient>
+    <filter id="blur3" x="-50%" y="-20%" width="200%" height="140%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="tex-cotton" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.6 0 0 0 -0.2" result="dark"/>
+      <feComposite in="dark" in2="SourceGraphic" operator="in" result="grain"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="grain"/></feMerge>
+    </filter>
+    <filter id="tex-knit" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="1.5 0.22" numOctaves="2" seed="7" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.85 0 0 0 -0.28" result="dark"/>
+      <feComposite in="dark" in2="SourceGraphic" operator="in" result="grain"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="grain"/></feMerge>
+    </filter>
+    <filter id="tex-linen" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09 1.3" numOctaves="3" seed="2" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.7 0 0 0 -0.22" result="dark"/>
+      <feComposite in="dark" in2="SourceGraphic" operator="in" result="grain"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="grain"/></feMerge>
+    </filter>
+    <filter id="tex-canvas" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB">
+      <feTurbulence type="turbulence" baseFrequency="1.4 0.8" numOctaves="2" seed="9" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.75 0 0 0 -0.12" result="dark"/>
+      <feComposite in="dark" in2="SourceGraphic" operator="in" result="grain"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="grain"/></feMerge>
+    </filter>
+  </defs>
+</svg>
+
+<div class="announce"><div class="wrap">ส่งฟรีทั่วไทยเมื่อซื้อครบ ฿1,500 · เปลี่ยนไซซ์ได้ภายใน 14 วัน</div></div>
+
+<header class="header">
+  <div class="wrap">
+    <div class="logo">RAOKWAEN<span>ราวแขวน STUDIO</span></div>
+    <nav class="nav" aria-label="เมนูหลัก">
+      <a href="#shop">มาใหม่</a>
+      <a href="#shop" data-tab="tops">เสื้อ</a>
+      <a href="#shop" data-tab="outer">ตัวนอก</a>
+      <a href="#shop" data-tab="dress">เดรส</a>
+      <a href="#shop" class="is-sale">Sale</a>
+    </nav>
+    <div class="icons">
+      <button class="icon-btn" type="button" aria-label="ค้นหา"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+      <button class="icon-btn" type="button" aria-label="บัญชีของฉัน"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></button>
+      <button class="icon-btn" type="button" aria-label="รายการโปรด"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+      <button class="icon-btn" type="button" id="cart-btn" aria-label="ตะกร้าสินค้า"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" id="cart-count">0</span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">New season · ฤดูฝน 2569</p>
+      <h1>คอลเลกชันใหม่<em>The Rain Edit</em></h1>
+      <p class="lede">ผ้าระบายอากาศ แห้งไว ตัดเย็บที่กรุงเทพฯ ในล็อตเล็ก เดินดูจากราวได้เหมือนอยู่ในร้าน</p>
+      <div class="btns">
+        <a class="btn" href="#shop">ช้อปเลย</a>
+        <a class="btn ghost" href="#shop" data-tab="outer">ดูตัวนอก</a>
+      </div>
+    </div>
+    <div class="window" id="window"></div>
+  </div>
+</section>
+
+<section class="services">
+  <div class="wrap">
+    <div class="service"><svg viewBox="0 0 34 34"><path d="M3 9h17v14H3zM20 14h6l4 5v4H20z"/><circle cx="9" cy="25" r="2.5"/><circle cx="25" cy="25" r="2.5"/></svg><div><b>ส่งฟรี</b><span>เมื่อซื้อครบ ฿1,500</span></div></div>
+    <div class="service"><svg viewBox="0 0 34 34"><path d="M7 14a10 10 0 0 1 18-4M27 20a10 10 0 0 1-18 4"/><path d="M25 5v5h-5M9 29v-5h5"/></svg><div><b>เปลี่ยนไซซ์ 14 วัน</b><span>ไม่มีค่าใช้จ่าย</span></div></div>
+    <div class="service"><svg viewBox="0 0 34 34"><rect x="7" y="15" width="20" height="14" rx="2"/><path d="M11 15v-4a6 6 0 0 1 12 0v4"/></svg><div><b>ชำระเงินปลอดภัย</b><span>บัตร · พร้อมเพย์</span></div></div>
+    <div class="service"><svg viewBox="0 0 34 34"><path d="M6 28L26 8M22 6l6 6"/><circle cx="9" cy="9" r="3"/><path d="M11 11l5 5"/></svg><div><b>ตัดเย็บที่กรุงเทพฯ</b><span>ล็อตละไม่เกิน 200 ตัว</span></div></div>
+  </div>
+</section>
+
+<main class="shop" id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>เลือกจากราว</h2>
+      <p>ชี้ที่เสื้อเพื่อหันด้านหน้า คลิกเพื่อเลือกสี ไซซ์ และดูด้านหลัง</p>
+    </div>
+    <div class="tabs" role="group" aria-label="หมวดสินค้า" id="tabs">
+      <button class="tab" type="button" data-cat="all" aria-pressed="true">ทั้งหมด</button>
+      <button class="tab" type="button" data-cat="tops" aria-pressed="false">เสื้อ</button>
+      <button class="tab" type="button" data-cat="outer" aria-pressed="false">ตัวนอก</button>
+      <button class="tab" type="button" data-cat="dress" aria-pressed="false">เดรส</button>
+    </div>
+    <div id="racks"></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <h3>RAOKWAEN</h3>
+      <p>ร้านเสื้อผ้าตัวอย่าง สินค้าและราคาในหน้านี้เป็นข้อมูลสมมติเพื่อสาธิตการแสดงผล</p>
+    </div>
+    <div>
+      <h3>ช้อป</h3>
+      <ul><li>เสื้อ</li><li>ตัวนอก</li><li>เดรส</li><li>Sale</li></ul>
+    </div>
+    <div>
+      <h3>ช่วยเหลือ</h3>
+      <ul><li>ตารางไซซ์</li><li>การจัดส่ง</li><li>การเปลี่ยนสินค้า</li></ul>
+    </div>
+    <div>
+      <h3>ติดต่อ</h3>
+      <ul><li>จันทร์–เสาร์ 10:00–19:00</li><li>LINE: @raokwaen</li></ul>
+    </div>
+    <div class="copyright">© 2569 Raokwaen Studio</div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="d-name">
+    <button class="close" id="d-close" type="button" aria-label="ปิด">×</button>
+    <div class="stage">
+      <div id="d-hang"></div>
+      <div class="view-tabs" role="group" aria-label="มุมมอง">
+        <button type="button" id="v-front" aria-pressed="true">ด้านหน้า</button>
+        <button type="button" id="v-back" aria-pressed="false">ด้านหลัง</button>
+      </div>
+    </div>
+    <div class="info">
+      <header>
+        <p class="eyebrow" id="d-sku"></p>
+        <h2 id="d-name"></h2>
+        <p class="price" id="d-price"></p>
+      </header>
+      <p class="desc" id="d-desc"></p>
+      <fieldset class="opt">
+        <legend>สี <span id="d-color-name"></span></legend>
+        <div class="swatches" id="d-swatches"></div>
+      </fieldset>
+      <fieldset class="opt">
+        <legend>ไซซ์ <span id="d-size-note"></span></legend>
+        <div class="sizes" id="d-sizes"></div>
+      </fieldset>
+      <div class="buy">
+        <div class="qty">
+          <button type="button" id="q-minus" aria-label="ลดจำนวน">−</button>
+          <output id="q-value" aria-live="polite">1</output>
+          <button type="button" id="q-plus" aria-label="เพิ่มจำนวน">+</button>
+        </div>
+        <button class="btn" id="d-add" type="button">เพิ่มลงตะกร้า</button>
+      </div>
+      <dl class="specs">
+        <div><dt>เนื้อผ้า</dt><dd id="d-fabric"></dd></div>
+        <div><dt>การดูแล</dt><dd id="d-care"></dd></div>
+        <div><dt>รหัส</dt><dd id="d-code"></dd></div>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+const SIZES = [
+  { id: "S", chestIn: 36 },
+  { id: "M", chestIn: 39 },
+  { id: "L", chestIn: 42 },
+  { id: "XL", chestIn: 45 },
+];
+const DEFAULT_SIZE_INDEX = 1;
+const MAX_QTY = 10;
+const TOAST_MS = 2600;
+const CART_BUMP_MS = 300;
+const FRONT_VIEW_WIDTH = 200;
+const SIDE_VIEW_WIDTH = 70;
+const VIEW_HEIGHT = 260;
+const RIB_STEP = 4;
+const CABLE_STEP = 12;
+const RACK_FACES = ["side-r", "front"];
+const DETAIL_FACES = ["side-r", "side-l", "front", "back"];
+const RACKS = [
+  { cat: "tops", label: "เสื้อ" },
+  { cat: "outer", label: "ตัวนอก" },
+  { cat: "dress", label: "เดรส" },
+];
+const WINDOW_PICKS = [["jacket", 0], ["dress", 0], ["sweater", 1]];
+
+const PRODUCTS = [
+  {
+    id: "tee", sku: "RW-101", shape: "tee", cat: "tops", name: "เสื้อยืดคอกลม Everyday", price: 390,
+    desc: "ทรงตรงไหล่ตก ผ้าหนาพอดีไม่ย้วย ใส่ได้ทุกวันทั้งปี",
+    fabric: "คอตตอน 100% · 180 แกรม", care: "ซักเครื่องน้ำเย็น 30°C กลับด้านก่อนซัก",
+    colors: [
+      { name: "ขาวนม", hex: "#EEEBE2" }, { name: "ดำถ่าน", hex: "#2B2C2E" },
+      { name: "กรมท่า", hex: "#27354F" }, { name: "เขียวมะกอก", hex: "#6C7147" },
+      { name: "ส้มอิฐ", hex: "#B4532F" },
+    ],
+  },
+  {
+    id: "oxford", sku: "RW-204", shape: "shirt", cat: "tops", name: "เชิ้ตอ็อกซ์ฟอร์ด", price: 890,
+    desc: "ปกปลายแหลม กระเป๋าอกหนึ่งใบ จีบหลังให้ขยับแขนสบาย",
+    fabric: "ผ้าอ็อกซ์ฟอร์ด คอตตอน 100%", care: "ซักเครื่อง 30°C รีดไฟกลาง",
+    colors: [
+      { name: "ฟ้าอ็อกซ์ฟอร์ด", hex: "#A8C0DD" }, { name: "ขาว", hex: "#F2F2ED" },
+      { name: "ชมพูหม่น", hex: "#D6A6A3" }, { name: "เขียวเซจ", hex: "#A1B497" },
+    ],
+  },
+  {
+    id: "sweater", sku: "RW-608", shape: "sweater", cat: "tops", name: "สเวตเตอร์ถักเกลียว", price: 1590,
+    desc: "ลายถักเกลียวกลางอก คอกลมขอบจั๊ม ใส่ในห้องแอร์หรือเดินทางหน้าหนาว",
+    fabric: "ไหมพรมเมอริโน 12 เกจ", care: "ซักมือน้ำเย็น ตากแนวราบ",
+    colors: [
+      { name: "ครีม", hex: "#E6DECB" }, { name: "แดงเลือดหมู", hex: "#6E2430" },
+      { name: "เทาเข้ม", hex: "#4A4C50" }, { name: "ฟ้าหม่น", hex: "#8FA6B8" },
+    ],
+  },
+  {
+    id: "hoodie", sku: "RW-310", shape: "hoodie", cat: "outer", name: "ฮู้ดดี้ผ้าหนา", price: 1290,
+    desc: "ฮู้ดสองชั้น กระเป๋าจิงโจ้ ขอบยางยืดที่ปลายแขนและชายเสื้อ",
+    fabric: "เฟรนช์เทอร์รี 320 แกรม", care: "ซักเครื่องน้ำเย็น ห้ามอบแห้ง",
+    colors: [
+      { name: "เทาท็อป", hex: "#9A9C9E" }, { name: "กรมท่า", hex: "#283453" },
+      { name: "เขียวป่า", hex: "#2F4A3A" }, { name: "ม่วงพลัม", hex: "#5B3551" },
+      { name: "มัสตาร์ด", hex: "#C9A03A" },
+    ],
+  },
+  {
+    id: "jacket", sku: "RW-522", shape: "jacket", cat: "outer", name: "แจ็กเก็ตช่าง Chore", price: 1890,
+    desc: "กระเป๋าสี่ใบ กระดุมทองเหลือง ผ้าแข็งตอนแรกและนิ่มลงตามการใช้งาน",
+    fabric: "แคนวาส 12 ออนซ์", care: "ซักเครื่องน้ำเย็น แยกสีในการซักครั้งแรก",
+    colors: [
+      { name: "ครามเข้ม", hex: "#2C3E63" }, { name: "น้ำตาลดิน", hex: "#7A5236" },
+      { name: "เขียวทหาร", hex: "#4C5A3B" }, { name: "ดำ", hex: "#222224" },
+    ],
+  },
+  {
+    id: "dress", sku: "RW-415", shape: "dress", cat: "dress", name: "เดรสลินินคอวี", price: 1490,
+    desc: "ทรงเอ ผูกเอวได้ ซิปซ่อนด้านหลัง ยิ่งซักยิ่งนุ่ม",
+    fabric: "ลินินผสมคอตตอน 55/45", care: "ซักมือหรือโหมดถนอมผ้า ตากในร่ม",
+    colors: [
+      { name: "ลินินธรรมชาติ", hex: "#D8CAB0" }, { name: "ดำ", hex: "#262626" },
+      { name: "เขียวขี้ม้า", hex: "#7A7A55" }, { name: "ฟ้าคราม", hex: "#3F5F8F" },
+      { name: "ขาวออฟไวต์", hex: "#EEEADF" },
+    ],
+  },
+];
+
+const piece = (cls, d, darkFolds = [], lightFolds = []) => ({ cls, d, darkFolds, lightFolds });
+const raw = (html) => ({ html });
+const mirrorPath = (d) => d.replace(/(\d+(?:\.\d+)?) (\d+(?:\.\d+)?)/g, (_, x, y) => `${FRONT_VIEW_WIDTH - Number(x)} ${y}`);
+const mirroredPair = (cls, d, darkFolds = [], lightFolds = []) => [
+  piece(cls, d, darkFolds, lightFolds),
+  piece(cls, mirrorPath(d), darkFolds.map(mirrorPath), lightFolds.map(mirrorPath)),
+];
+const mirroredRaw = (cls, d) => raw(`<path class="${cls}" d="${d}"/><path class="${cls}" d="${mirrorPath(d)}"/>`);
+
+const buildRibLines = (x1, x2, y1, y2) => {
+  const lines = [];
+  for (let x = x1 + RIB_STEP; x < x2; x += RIB_STEP) lines.push(`M${x} ${y1 + 2}L${x} ${y2 - 2}`);
+  return `<path class="rib" d="${lines.join("")}"/>`;
+};
+const buildCable = (cx, y1, y2) => {
+  const lines = [];
+  for (let y = y1; y < y2; y += CABLE_STEP) lines.push(`M${cx - 9} ${y}Q${cx} ${y + 9} ${cx + 9} ${y}`);
+  return `<path class="rib" d="${lines.join("")}M${cx - 13} ${y1}L${cx - 13} ${y2}M${cx + 13} ${y1}L${cx + 13} ${y2}"/>`;
+};
+const buildButtons = (cls, cx, ys) => ys.map((y) => `<circle class="${cls}" cx="${cx}" cy="${y}" r="2.8"/>`).join("");
+
+const buildSideView = (spec) => {
+  const { len, top, bottom, sleeve, cuff, hood, rib } = spec;
+  const parts = [];
+  if (hood) parts.push(piece("b", "M33 14Q12 22 12 54Q13 86 30 96L34 34Z", ["M18 40Q16 70 28 90"]));
+  parts.push(piece("b",
+    `M35 9C${35 + top} 11 ${37 + top} 28 ${35 + top} 48L${35 + bottom} ${len}Q35 ${len + 6} ${35 - bottom} ${len}L${35 - top} 48C${33 - top} 28 ${35 - top} 11 35 9Z`,
+    [`M${41 - bottom} 90Q${39 - bottom} 160 ${42 - bottom} ${len - 8}`, `M${29 + bottom} 96Q${32 + bottom} 170 ${28 + bottom} ${len - 8}`],
+    [`M35 70Q37 160 34 ${len - 10}`]));
+  if (rib) parts.push(raw(`<path class="t" d="M${35 - bottom} ${len - 22}L${35 + bottom} ${len - 22}L${35 + bottom} ${len}Q35 ${len + 6} ${35 - bottom} ${len}Z"/>`));
+  if (sleeve) {
+    parts.push(piece("s",
+      `M35 15C46 17 50 28 49 44L51 ${sleeve}Q35 ${sleeve + 4} 19 ${sleeve}L21 44C20 28 24 17 35 15Z`,
+      [`M26 60Q24 ${Math.round(sleeve * .6)} 25 ${sleeve - 6}`],
+      [`M38 50Q40 ${Math.round(sleeve * .6)} 38 ${sleeve - 6}`]));
+  }
+  if (sleeve && cuff) parts.push(raw(`<path class="t" d="M19.6 ${sleeve - 20}L50.4 ${sleeve - 20}L51 ${sleeve}Q35 ${sleeve + 4} 19 ${sleeve}Z"/>`));
+  return parts;
+};
+
+const TEE_BODY_FOLDS = [["M58 52L60 104", "M142 52L140 104", "M72 128Q78 184 70 238", "M130 118Q124 176 134 238", "M100 160Q98 206 102 242"], ["M86 112Q90 172 84 238", "M116 124Q112 182 118 238"]];
+const TEE_SLEEVES = mirroredPair("s", "M62 19Q44 24 38 38L32 94Q44 100 58 98L55 52Q56 32 62 19Z", ["M45 46Q42 70 39 92"], ["M51 40Q51 68 49 94"]);
+const TEE_HEMS = raw(`<path class="k" d="M56 230Q100 238 144 230M34 86Q45 92 57 90M166 86Q155 92 143 90"/>`);
+
+const SHIRT_BODY_FOLDS = [["M58 64L57 214", "M142 64L143 214", "M74 104Q80 172 72 238", "M128 112Q122 180 130 238"], ["M86 122Q90 182 84 238", "M116 104Q112 172 118 238"]];
+const SHIRT_SLEEVES = [
+  ...mirroredPair("s", "M62 18Q42 22 37 40L30 212L52 214L55 60Q56 32 62 18Z", ["M43 60Q41 140 40 208"], ["M49 52Q48 130 47 208"]),
+  mirroredRaw("t", "M30 212L52 214L52 232L30 230Z"),
+  raw(buildButtons("n", 41, [223]) + buildButtons("n", 159, [223])),
+];
+
+const HOODIE_BODY = [
+  piece("b", "M66 22L134 22Q148 28 150 44L152 222L48 222L50 44Q52 28 66 22Z",
+    ["M58 70L56 214", "M142 70L144 214", "M76 110Q82 150 76 210", "M124 110Q118 150 124 210"],
+    ["M90 100Q92 140 88 200", "M112 100Q110 140 114 200"]),
+  raw(`<path class="t" d="M48 220L152 220L151 244Q100 248 49 244Z"/>${buildRibLines(48, 152, 220, 245)}`),
+];
+const HOODIE_SLEEVES = [
+  ...mirroredPair("s", "M66 22Q44 26 38 46L30 214L54 216L56 66Q56 36 66 22Z", ["M44 70Q42 140 41 210"], ["M50 60Q49 130 48 210"]),
+  mirroredRaw("t", "M30 212L54 214L53 236L31 234Z"),
+];
+
+const DRESS_SKIRT_FOLDS = [["M86 122Q76 190 58 250", "M100 118Q98 190 104 255", "M116 122Q128 190 144 250", "M72 30Q73 60 73 98", "M128 30Q127 60 127 98"], ["M93 122Q86 190 76 253", "M110 122Q114 190 124 253"]];
+const DRESS_WAIST = raw(`<path class="t" d="M72 100L128 100L129 110L71 110Z"/><path class="k" d="M34 242Q100 254 166 242"/>`);
+
+const JACKET_BODY_FOLDS = [["M57 66L55 224", "M143 66L145 224", "M76 120Q80 180 74 240", "M126 120Q122 180 128 240"], ["M88 110Q90 170 86 240", "M114 110Q112 170 116 240"]];
+const JACKET_SLEEVES = [
+  ...mirroredPair("s", "M62 18Q40 22 34 42L26 222L52 224L55 64Q55 34 62 18Z", ["M40 64Q38 140 37 218"], ["M47 56Q46 130 45 218"]),
+  raw(`<path class="k" d="M27 208L52 210M173 208L148 210"/>`),
+];
+
+const SWEATER_BODY_FOLDS = [["M57 64L56 206", "M143 64L144 206", "M72 110Q76 170 70 222", "M128 110Q124 170 130 222"], ["M84 110Q86 170 82 222", "M116 110Q114 170 118 222"]];
+const SWEATER_SLEEVES = [
+  ...mirroredPair("s", "M64 18Q44 22 38 42L32 210L54 212L56 62Q57 32 64 18Z", ["M44 64Q42 140 41 206"], ["M50 56Q49 130 48 206"]),
+  mirroredRaw("t", "M32 208L54 210L54 232L32 230Z"),
+  raw(buildRibLines(32, 54, 210, 231) + buildRibLines(146, 168, 210, 231)),
+];
+const SWEATER_HEM = raw(`<path class="t" d="M50 224L150 224L150 246L50 246Z"/>${buildRibLines(50, 150, 224, 246)}`);
+
+const SHAPES = {
+  tee: {
+    texture: "tex-cotton",
+    side: { len: 240, top: 13, bottom: 16, sleeve: 100 },
+    front: [
+      raw(`<path class="d" d="M82 12Q100 19 118 12Q100 30 82 12Z"/>`),
+      piece("b", "M82 12Q100 30 118 12L138 19Q146 24 147 40L146 238Q100 246 54 238L53 40Q54 24 62 19Z", ...TEE_BODY_FOLDS),
+      ...TEE_SLEEVES,
+      raw(`<path class="t" d="M82 12Q100 30 118 12L123 14Q100 38 77 14Z"/>`),
+      TEE_HEMS,
+    ],
+    back: [
+      piece("b", "M82 12Q100 20 118 12L138 19Q146 24 147 40L146 238Q100 246 54 238L53 40Q54 24 62 19Z", ...TEE_BODY_FOLDS),
+      ...TEE_SLEEVES,
+      raw(`<path class="t" d="M82 12Q100 20 118 12L123 14Q100 28 77 14Z"/><rect class="n" x="94" y="25" width="12" height="7" rx="1"/>`),
+      TEE_HEMS,
+    ],
+  },
+  shirt: {
+    texture: "tex-cotton",
+    side: { len: 242, top: 12, bottom: 15, sleeve: 232, cuff: true },
+    front: [
+      raw(`<path class="d" d="M84 10Q100 16 116 10L100 30Z"/>`),
+      piece("b", "M84 10L100 30L116 10L138 18Q146 24 147 40L148 240Q100 248 52 240L53 40Q54 24 62 18Z", ...SHIRT_BODY_FOLDS),
+      raw(`<path class="k" d="M96 34L96 242M104 34L104 242M110 62L130 62L130 86Q120 90 110 86Z"/>${buildButtons("n", 100, [56, 86, 116, 146, 176, 206])}`),
+      ...SHIRT_SLEEVES,
+      mirroredRaw("t", "M84 10L100 30L90 44L74 16Z"),
+    ],
+    back: [
+      piece("b", "M84 10Q100 16 116 10L138 18Q146 24 147 40L148 240Q100 248 52 240L53 40Q54 24 62 18Z", ...SHIRT_BODY_FOLDS),
+      raw(`<path class="k" d="M56 52Q100 58 144 52M100 57L100 84"/>`),
+      ...SHIRT_SLEEVES,
+      raw(`<path class="t" d="M84 10Q100 16 116 10L117 17Q100 24 83 17Z"/>`),
+    ],
+  },
+  hoodie: {
+    texture: "tex-cotton",
+    side: { len: 246, top: 17, bottom: 19, sleeve: 236, cuff: true, hood: true, rib: true },
+    front: [
+      ...HOODIE_BODY,
+      ...HOODIE_SLEEVES,
+      piece("t", "M64 150L136 150L146 204L54 204Z", ["M60 200L140 200"], ["M70 154L130 154"]),
+      raw(`<path class="k" d="M67 154L133 154L142 200L58 200Z"/>`),
+      piece("b", "M62 30Q64 4 100 4Q136 4 138 30Q124 50 100 52Q76 50 62 30Z", ["M68 34Q84 50 100 50Q116 50 132 34"], ["M70 16Q100 6 130 16"]),
+      raw(`<path class="d" d="M76 26Q100 12 124 26Q114 44 100 46Q86 44 76 26Z"/><path class="str" d="M92 46Q90 72 91 98M108 46Q110 72 109 96"/>`),
+    ],
+    back: [
+      ...HOODIE_BODY,
+      ...HOODIE_SLEEVES,
+      piece("b", "M64 24Q100 6 136 24L130 92Q100 108 70 92Z", ["M70 88Q100 104 130 88", "M76 30Q72 60 78 86"], ["M100 14L100 94"]),
+      raw(`<path class="k" d="M100 12L100 100"/>`),
+    ],
+  },
+  dress: {
+    texture: "tex-linen",
+    side: { len: 252, top: 8, bottom: 30 },
+    front: [
+      raw(`<path class="d" d="M86 12Q100 18 114 12L100 52Z"/>`),
+      piece("b", "M70 12L84 12L100 52L116 12L130 12L134 70Q133 90 128 104L172 248Q100 260 28 248L72 104Q67 90 66 70Z", ...DRESS_SKIRT_FOLDS),
+      DRESS_WAIST,
+      raw(`<path class="t" d="M108 108Q112 130 108 150L102 150Q106 130 104 108Z"/><path class="t" d="M114 108Q124 128 124 146L118 148Q118 128 110 108Z"/>`),
+    ],
+    back: [
+      piece("b", "M70 12L84 12Q100 22 116 12L130 12L134 70Q133 90 128 104L172 248Q100 260 28 248L72 104Q67 90 66 70Z", ...DRESS_SKIRT_FOLDS),
+      DRESS_WAIST,
+      raw(`<path class="k" d="M100 24L100 100"/><rect class="n" x="97.5" y="22" width="5" height="8" rx="1"/>`),
+    ],
+  },
+  jacket: {
+    texture: "tex-canvas",
+    side: { len: 244, top: 17, bottom: 19, sleeve: 224 },
+    front: [
+      raw(`<path class="d" d="M82 10Q100 16 118 10L100 44Z"/>`),
+      piece("b", "M62 18L82 10L100 44L118 10L138 18Q150 24 151 42L154 244L46 244L49 42Q50 24 62 18Z", ...JACKET_BODY_FOLDS),
+      raw(`<path class="ln" d="M100 46L100 244"/><path class="k" d="M62 80L86 80L86 104L62 104ZM114 80L138 80L138 104L114 104ZM60 150L90 150L90 192L60 192ZM110 150L140 150L140 192L110 192ZM48 236L152 236"/>`),
+      mirroredRaw("t", "M61 74L87 74L87 84L61 84Z"),
+      raw(buildButtons("metal-btn", 106, [78, 112, 146, 180, 214])),
+      ...JACKET_SLEEVES,
+      mirroredRaw("t", "M82 10L100 44L92 66L70 20Z"),
+    ],
+    back: [
+      piece("b", "M62 18L82 10Q100 16 118 10L138 18Q150 24 151 42L154 244L46 244L49 42Q50 24 62 18Z", ...JACKET_BODY_FOLDS),
+      raw(`<path class="k" d="M50 62Q100 68 150 62M74 66L72 236M126 66L128 236M48 236L152 236"/>`),
+      ...JACKET_SLEEVES,
+      raw(`<path class="t" d="M80 10Q100 18 120 10L124 22Q100 30 76 22Z"/>`),
+    ],
+  },
+  sweater: {
+    texture: "tex-knit",
+    side: { len: 246, top: 15, bottom: 16, sleeve: 232, cuff: true, rib: true },
+    front: [
+      raw(`<path class="d" d="M82 12Q100 19 118 12Q100 30 82 12Z"/>`),
+      piece("b", "M64 18L82 12Q100 30 118 12L136 18Q148 24 149 42L150 226L50 226L51 42Q52 24 64 18Z", ...SWEATER_BODY_FOLDS),
+      raw(buildCable(100, 48, 220)),
+      ...SWEATER_SLEEVES,
+      raw(`<path class="t" d="M82 12Q100 30 118 12L124 14Q100 40 76 14Z"/>`),
+      SWEATER_HEM,
+    ],
+    back: [
+      piece("b", "M64 18L82 12Q100 20 118 12L136 18Q148 24 149 42L150 226L50 226L51 42Q52 24 64 18Z", ...SWEATER_BODY_FOLDS),
+      ...SWEATER_SLEEVES,
+      raw(`<path class="t" d="M82 12Q100 20 118 12L124 14Q100 30 76 14Z"/>`),
+      SWEATER_HEM,
+    ],
+  },
+};
+
+const HANGER_FRONT = `<path class="wood" fill="url(#g-wood)" d="M100 2C122 6 146 14 162 24Q168 28 160 31L40 31Q32 28 38 24C54 14 78 6 100 2Z"/>`;
+const HANGER_SIDE = `<rect class="wood" fill="url(#g-wood)" x="30" y="1" width="10" height="16" rx="3"/>`;
+const HOOK_SVG = `<svg class="hook" viewBox="0 0 40 50" aria-hidden="true"><path stroke="url(#g-metal)" d="M20 50L20 28Q20 12 29 12Q37 12 37 19Q37 25 31 26"/></svg>`;
+
+const getViewPieces = (shapeKey, view) => (view === "side" ? buildSideView(SHAPES[shapeKey].side) : SHAPES[shapeKey][view]);
+const getClipId = (shapeKey, view, index) => `clip-${shapeKey}-${view}-${index}`;
+const hasFolds = (part) => part.darkFolds && (part.darkFolds.length + part.lightFolds.length) > 0;
+
+const renderFolds = (part, clipId) => `<g clip-path="url(#${clipId})">${
+  part.darkFolds.map((d) => `<path class="fd" filter="url(#blur3)" d="${d}"/>`).join("")
+}${part.lightFolds.map((d) => `<path class="fl" filter="url(#blur3)" d="${d}"/>`).join("")}</g>`;
+
+const renderPart = (part, clipId) => {
+  if (part.html) return part.html;
+  return `<path class="${part.cls}" d="${part.d}"/><path class="sh" fill="url(#g-round)" d="${part.d}"/><path class="sh" fill="url(#g-top)" d="${part.d}"/>${hasFolds(part) ? renderFolds(part, clipId) : ""}`;
+};
+
+const renderView = (shapeKey, view) => {
+  const isSide = view === "side";
+  const width = isSide ? SIDE_VIEW_WIDTH : FRONT_VIEW_WIDTH;
+  const parts = getViewPieces(shapeKey, view).map((part, i) => renderPart(part, getClipId(shapeKey, view, i))).join("");
+  return `<svg class="g" viewBox="0 0 ${width} ${VIEW_HEIGHT}" aria-hidden="true">${isSide ? HANGER_SIDE : HANGER_FRONT}<g filter="url(#${SHAPES[shapeKey].texture})">${parts}</g></svg>`;
+};
+
+const buildClipPaths = () => Object.keys(SHAPES).flatMap((shapeKey) => ["front", "back", "side"].flatMap((view) =>
+  getViewPieces(shapeKey, view)
+    .map((part, i) => (hasFolds(part) ? `<clipPath id="${getClipId(shapeKey, view, i)}"><path d="${part.d}"/></clipPath>` : ""))
+)).join("");
+
+const VIEW_CACHE = new Map();
+const getCachedView = (shapeKey, view) => {
+  const key = `${shapeKey}:${view}`;
+  if (!VIEW_CACHE.has(key)) VIEW_CACHE.set(key, renderView(shapeKey, view));
+  return VIEW_CACHE.get(key);
+};
+
+const FACE_VIEW = { "side-r": "side", "side-l": "side", front: "front", back: "back" };
+const buildFace = (shapeKey, face) => `<span class="face face-${face}">${getCachedView(shapeKey, FACE_VIEW[face])}</span>`;
+
+const buildHanging = (product, hex, faces, turnClass = "") => `
+  <span class="hanging" style="--dye:${hex}">
+    <span class="swing">
+      ${HOOK_SVG}
+      <span class="turn ${turnClass}">${faces.map((face) => buildFace(product.shape, face)).join("")}</span>
+    </span>
+  </span>`;
+
+const formatBaht = (amount) => `฿${amount.toLocaleString("th-TH")}`;
+const findProduct = (id) => PRODUCTS.find((p) => p.id === id);
+
+const buildSlot = (product, colorIndex) => {
+  const color = product.colors[colorIndex];
+  return `
+  <li class="slot" data-id="${product.id}" data-color="${colorIndex}">
+    <button class="hang-btn" type="button" aria-label="${product.name} สี${color.name} ${formatBaht(product.price)}"></button>
+    ${buildHanging(product, color.hex, RACK_FACES)}
+    <span class="slot-meta"><b>${product.name}</b><span>${color.name} · ${formatBaht(product.price)}</span></span>
+  </li>`;
+};
+
+const buildRack = (rack) => {
+  const products = PRODUCTS.filter((p) => p.cat === rack.cat);
+  const slots = products.flatMap((p) => p.colors.map((_, i) => buildSlot(p, i)));
+  return `
+  <section class="rack-block" data-cat="${rack.cat}" aria-label="ราว${rack.label}">
+    <div class="rack-label">${rack.label}<span>${slots.length} ตัวบนราว</span></div>
+    <div class="rack-scroll"><ul class="rack-track">${slots.join("")}</ul></div>
+  </section>`;
+};
+
+const buildWindowItem = ([productId, colorIndex]) => {
+  const product = findProduct(productId);
+  const color = product.colors[colorIndex];
+  return `<button class="window-item" type="button" data-id="${productId}" data-color="${colorIndex}" aria-label="${product.name} สี${color.name}">${buildHanging(product, color.hex, RACK_FACES, "is-front")}</button>`;
+};
+
+const restartAnimation = (el, cls) => {
+  el.classList.remove(cls);
+  void el.offsetWidth;
+  el.classList.add(cls);
+};
+const ANIMATION_CLASSES = ["is-swinging", "is-dropping", "is-swaying", "is-flipping"];
+const clearOwnAnimations = (event) => {
+  const el = event.target.closest(".swing, .turn");
+  if (el) el.classList.remove(...ANIMATION_CLASSES.filter((c) => c !== "is-flipping" || event.animationName === "side-flash"));
+};
+
+const racksEl = document.getElementById("racks");
+const overlayEl = document.getElementById("overlay");
+const hangEl = document.getElementById("d-hang");
+const toastEl = document.getElementById("toast");
+const cartCountEl = document.getElementById("cart-count");
+const viewFrontBtn = document.getElementById("v-front");
+const viewBackBtn = document.getElementById("v-back");
+const qtyEl = document.getElementById("q-value");
+
+const state = { product: null, colorIndex: 0, sizeIndex: DEFAULT_SIZE_INDEX, qty: 1, face: "front", cartQty: 0, cartTotal: 0, opener: null, toastTimer: 0 };
+
+const renderStore = () => {
+  document.getElementById("defs").insertAdjacentHTML("beforeend", buildClipPaths());
+  racksEl.innerHTML = RACKS.map(buildRack).join("");
+  document.getElementById("window").innerHTML = WINDOW_PICKS.map(buildWindowItem).join("");
+};
+
+const swingOnEnter = (event) => {
+  if (event.pointerType !== "mouse") return;
+  const slot = event.target.closest(".slot");
+  if (!slot || slot.contains(event.relatedTarget)) return;
+  restartAnimation(slot.querySelector(".swing"), "is-swinging");
+};
+
+const filterRacks = (cat) => {
+  document.querySelectorAll("#tabs .tab").forEach((tab) => tab.setAttribute("aria-pressed", String(tab.dataset.cat === cat)));
+  racksEl.querySelectorAll(".rack-block").forEach((block) => { block.hidden = cat !== "all" && block.dataset.cat !== cat; });
+};
+
+const renderSwatches = (product) => {
+  document.getElementById("d-swatches").innerHTML = product.colors.map((c, i) => `
+    <label class="sw" title="${c.name}">
+      <input type="radio" name="d-color" id="d-color-${i}" value="${i}" ${i === state.colorIndex ? "checked" : ""} aria-label="${c.name}">
+      <span class="chipc" style="--c:${c.hex}"></span>
+    </label>`).join("");
+};
+
+const renderSizes = () => {
+  document.getElementById("d-sizes").innerHTML = SIZES.map((s, i) => `
+    <label class="sz">
+      <input type="radio" name="d-size" id="d-size-${s.id}" value="${i}" ${i === state.sizeIndex ? "checked" : ""}>
+      <span>${s.id}</span>
+    </label>`).join("");
+};
+
+const updateSizeNote = () => {
+  document.getElementById("d-size-note").textContent = `· รอบอก ${SIZES[state.sizeIndex].chestIn} นิ้ว`;
+};
+const updateQty = (delta) => {
+  state.qty = Math.min(MAX_QTY, Math.max(1, state.qty + delta));
+  qtyEl.textContent = String(state.qty);
+};
+
+const getCurrentColor = () => state.product.colors[state.colorIndex];
+
+const applyColor = (animateSway) => {
+  const color = getCurrentColor();
+  hangEl.querySelector(".hanging").style.setProperty("--dye", color.hex);
+  document.getElementById("d-color-name").textContent = `· ${color.name}`;
+  document.getElementById("d-code").textContent = `${state.product.sku}-${String(state.colorIndex + 1).padStart(2, "0")}`;
+  if (animateSway) restartAnimation(hangEl.querySelector(".swing"), "is-swaying");
+};
+
+const setViewButtons = (face) => {
+  viewFrontBtn.setAttribute("aria-pressed", String(face === "front"));
+  viewBackBtn.setAttribute("aria-pressed", String(face === "back"));
+};
+
+const showFace = (face) => {
+  if (face === state.face) return;
+  const turn = hangEl.querySelector(".turn");
+  turn.classList.toggle("is-front", face === "front");
+  turn.classList.toggle("is-back", face === "back");
+  restartAnimation(turn, "is-flipping");
+  state.face = face;
+  setViewButtons(face);
+};
+
+const turnToFrontAfterPaint = (turn) => {
+  requestAnimationFrame(() => requestAnimationFrame(() => turn.classList.add("is-front")));
+};
+
+const fillProductText = (product) => {
+  document.getElementById("d-sku").textContent = product.sku;
+  document.getElementById("d-name").textContent = product.name;
+  document.getElementById("d-price").textContent = formatBaht(product.price);
+  document.getElementById("d-desc").textContent = product.desc;
+  document.getElementById("d-fabric").textContent = product.fabric;
+  document.getElementById("d-care").textContent = product.care;
+};
+
+const openDetail = (product, colorIndex, opener) => {
+  Object.assign(state, { product, colorIndex, sizeIndex: DEFAULT_SIZE_INDEX, qty: 1, face: "front", opener });
+  fillProductText(product);
+  hangEl.innerHTML = buildHanging(product, getCurrentColor().hex, DETAIL_FACES);
+  renderSwatches(product);
+  renderSizes();
+  updateSizeNote();
+  updateQty(0);
+  setViewButtons("front");
+  overlayEl.hidden = false;
+  applyColor(false);
+  restartAnimation(hangEl.querySelector(".swing"), "is-dropping");
+  turnToFrontAfterPaint(hangEl.querySelector(".turn"));
+  document.getElementById("d-close").focus();
+};
+
+const closeDetail = () => {
+  overlayEl.hidden = true;
+  if (state.opener) state.opener.focus();
+};
+
+const bumpCartCount = () => {
+  cartCountEl.textContent = String(state.cartQty);
+  cartCountEl.classList.add("bump");
+  setTimeout(() => cartCountEl.classList.remove("bump"), CART_BUMP_MS);
+};
+
+const showToast = (message) => {
+  toastEl.textContent = message;
+  toastEl.hidden = false;
+  clearTimeout(state.toastTimer);
+  state.toastTimer = setTimeout(() => { toastEl.hidden = true; }, TOAST_MS);
+};
+
+const addToCart = () => {
+  const color = getCurrentColor();
+  const size = SIZES[state.sizeIndex].id;
+  state.cartQty += state.qty;
+  state.cartTotal += state.qty * state.product.price;
+  bumpCartCount();
+  showToast(`เพิ่ม ${state.product.name} สี${color.name} ไซซ์ ${size} × ${state.qty} ลงตะกร้าแล้ว`);
+};
+
+const describeCart = () => (state.cartQty === 0
+  ? "ตะกร้ายังว่าง เลือกเสื้อจากราวได้เลย"
+  : `ในตะกร้ามี ${state.cartQty} ชิ้น รวม ${formatBaht(state.cartTotal)}`);
+
+const trapFocus = (event) => {
+  const focusables = [...overlayEl.querySelectorAll("button, input:checked")];
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+};
+
+const handleKeydown = (event) => {
+  if (overlayEl.hidden) return;
+  if (event.key === "Escape") closeDetail();
+  if (event.key === "Tab") trapFocus(event);
+};
+
+const openFromTrigger = (trigger) => {
+  openDetail(findProduct(trigger.dataset.id), Number(trigger.dataset.color), trigger.querySelector("button") || trigger);
+};
+
+const selectTabFromLink = (event) => {
+  const link = event.target.closest("[data-tab]");
+  if (link) filterRacks(link.dataset.tab);
+};
+
+renderStore();
+document.addEventListener("animationend", clearOwnAnimations);
+racksEl.addEventListener("pointerover", swingOnEnter);
+racksEl.addEventListener("click", (event) => {
+  const slot = event.target.closest(".slot");
+  if (slot) openFromTrigger(slot);
+});
+document.getElementById("window").addEventListener("click", (event) => {
+  const item = event.target.closest(".window-item");
+  if (item) openFromTrigger(item);
+});
+document.getElementById("tabs").addEventListener("click", (event) => {
+  const tab = event.target.closest(".tab");
+  if (tab) filterRacks(tab.dataset.cat);
+});
+document.addEventListener("click", selectTabFromLink);
+document.getElementById("d-swatches").addEventListener("change", (event) => {
+  state.colorIndex = Number(event.target.value);
+  applyColor(true);
+});
+document.getElementById("d-sizes").addEventListener("change", (event) => {
+  state.sizeIndex = Number(event.target.value);
+  updateSizeNote();
+});
+document.getElementById("q-minus").addEventListener("click", () => updateQty(-1));
+document.getElementById("q-plus").addEventListener("click", () => updateQty(1));
+viewFrontBtn.addEventListener("click", () => showFace("front"));
+viewBackBtn.addEventListener("click", () => showFace("back"));
+document.getElementById("d-add").addEventListener("click", addToCart);
+document.getElementById("d-close").addEventListener("click", closeDetail);
+document.getElementById("cart-btn").addEventListener("click", () => showToast(describeCart()));
+overlayEl.addEventListener("click", (event) => { if (event.target === overlayEl) closeDetail(); });
+document.addEventListener("keydown", handleKeydown);
+</script>
+</body>
+</html>
